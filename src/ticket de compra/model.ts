@@ -1,12 +1,12 @@
 // Producto
 
 export type TipoIva =
-  | "general"
-  | "reducido"
-  | "superreducidoA"
-  | "superreducidoB"
-  | "superreducidoC"
-  | "sinIva";
+  | "general" // 0.79
+  | "reducido" // 0.9
+  | "superreducidoA" // 0.95
+  | "superreducidoB" // 0.96
+  | "superreducidoC" // -
+  | "sinIva"; // -
 
 export interface Producto {
   nombre: string;
