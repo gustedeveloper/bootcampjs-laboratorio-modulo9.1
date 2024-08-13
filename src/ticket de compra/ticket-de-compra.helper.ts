@@ -88,8 +88,6 @@ export const calcularResultadoLineaTicket = (
 
 const resultadoLineaTicket = calcularResultadoLineaTicket(productos);
 
-console.log(resultadoLineaTicket);
-
 // Cálculo de totales
 
 export const calculoTotalSinIva = (
@@ -133,8 +131,6 @@ export const crearResultadoTotalTicket = (
   return resultadoTotalTicket;
 };
 
-console.log(crearResultadoTotalTicket(resultadoLineaTicket));
-
 export const calculoTotalPorTipoDeIva = (
   resultadoLineaTicket: ResultadoLineaTicket[]
 ): TotalPorTipoIva[] => {
@@ -165,5 +161,3 @@ export const calculoTotalPorTipoDeIva = (
   );
   return resultado;
 };
-
-console.log(calculoTotalPorTipoDeIva(resultadoLineaTicket));
