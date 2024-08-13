@@ -54,13 +54,15 @@ export const calcularResultadoLineaTicket = (
 
 const resultadoLineaTicket = calcularResultadoLineaTicket(productos);
 
+console.log(resultadoLineaTicket);
+
 // Cálculo de totales
 
 export const calculoTotalSinIva = (
   resultadoLineaTicket: ResultadoLineaTicket[]
 ): number => {
   const totalSinIva = resultadoLineaTicket.reduce(
-    (total, resultado) => total + resultado.precioSinIva,
+    (total, resultado) => total + resultado.precioSinIva * resultado.cantidad,
     0
   );
   const totalSinIvaRedondeado = Number(totalSinIva.toFixed(2));
@@ -68,3 +70,16 @@ export const calculoTotalSinIva = (
 };
 
 console.log(calculoTotalSinIva(resultadoLineaTicket));
+
+export const calculoTotalConIva = (
+  resultadoLineaTicket: ResultadoLineaTicket[]
+): number => {
+  const totalConIva = resultadoLineaTicket.reduce(
+    (total, resultado) => total + resultado.precioConIva * resultado.cantidad,
+    0
+  );
+  const totalConIvaRedondeado = Number(totalConIva.toFixed(2));
+  return totalConIvaRedondeado;
+};
+
+console.log(calculoTotalConIva(resultadoLineaTicket));
