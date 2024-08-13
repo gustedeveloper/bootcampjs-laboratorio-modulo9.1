@@ -56,6 +56,62 @@ export const productos: LineaTicket[] = [
     },
     cantidad: 1,
   },
+  {
+    producto: {
+      nombre: "Pan integral",
+      precio: 1.5,
+      tipoIva: "superreducidoC",
+    },
+    cantidad: 4,
+  },
+  {
+    producto: {
+      nombre: "Aceite de oliva virgen extra",
+      precio: 4,
+      tipoIva: "superreducidoA",
+    },
+    cantidad: 2,
+  },
+  {
+    producto: {
+      nombre: "Libro de cocina",
+      precio: 15,
+      tipoIva: "superreducidoB",
+    },
+    cantidad: 1,
+  },
+  {
+    producto: {
+      nombre: "Manzanas",
+      precio: 3,
+      tipoIva: "superreducidoC",
+    },
+    cantidad: 5,
+  },
+  {
+    producto: {
+      nombre: "Zapatos de cuero",
+      precio: 50,
+      tipoIva: "general",
+    },
+    cantidad: 1,
+  },
+  {
+    producto: {
+      nombre: "Queso manchego",
+      precio: 6,
+      tipoIva: "superreducidoC",
+    },
+    cantidad: 2,
+  },
+  {
+    producto: {
+      nombre: "Hortalizas",
+      precio: 2.5,
+      tipoIva: "superreducidoC",
+    },
+    cantidad: 4,
+  },
 ];
 
 // Resultado línea de ticket: Por cada producto queremos el nombre, la cantidad, el precio sin IVA, el tipo de IVA y el precio con IVA.
