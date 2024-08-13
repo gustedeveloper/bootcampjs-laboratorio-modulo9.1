@@ -3,7 +3,36 @@ import {
   productos,
   ResultadoLineaTicket,
   ResultadoTotalTicket,
+  TotalPorTipoIva,
 } from "./model";
+
+export const calcularImporteDeIva = (
+  precio: number,
+  tipoIva: string
+): number => {
+  let iva: number;
+  switch (tipoIva) {
+    case "general":
+      iva = precio * 0.21;
+      break;
+    case "reducido":
+      iva = precio * 0.1;
+      break;
+    case "superreducidoA":
+      iva = precio * 0.05;
+      break;
+    case "superreducidoB":
+      iva = precio * 0.04;
+      break;
+    case "superreducidoC":
+      iva = 0;
+      break;
+    default:
+      throw new Error("Tipo de IVA no válido");
+  }
+
+  return iva;
+};
 
 export const calculaPrecioUnitarioSinIva = (
   precio: number,
@@ -36,7 +65,7 @@ export const calculaPrecioUnitarioSinIva = (
 export const calcularResultadoLineaTicket = (
   productos: LineaTicket[]
 ): ResultadoLineaTicket[] => {
-  let resultado: ResultadoLineaTicket[] = productos.reduce(
+  const resultado: ResultadoLineaTicket[] = productos.reduce(
     (acumulador: ResultadoLineaTicket[], producto) => {
       const resultadoProducto: ResultadoLineaTicket = {
         nombre: producto.producto.nombre,
@@ -74,8 +103,6 @@ export const calculoTotalSinIva = (
   return totalSinIvaRedondeado;
 };
 
-console.log(calculoTotalSinIva(resultadoLineaTicket));
-
 export const calculoTotalConIva = (
   resultadoLineaTicket: ResultadoLineaTicket[]
 ): number => {
@@ -87,8 +114,6 @@ export const calculoTotalConIva = (
   return totalConIvaRedondeado;
 };
 
-console.log(calculoTotalConIva(resultadoLineaTicket));
-
 export const calculoTotalIva = (): number => {
   const totalConIva = calculoTotalConIva(resultadoLineaTicket);
   const totalSinIva = calculoTotalSinIva(resultadoLineaTicket);
@@ -96,8 +121,6 @@ export const calculoTotalIva = (): number => {
   const totalIvaRedondeado = Number(totalIva.toFixed(2));
   return totalIvaRedondeado;
 };
-
-console.log(calculoTotalIva());
 
 export const crearResultadoTotalTicket = (
   resultadoLineaTicket: ResultadoLineaTicket[]
@@ -111,3 +134,36 @@ export const crearResultadoTotalTicket = (
 };
 
 console.log(crearResultadoTotalTicket(resultadoLineaTicket));
+
+export const calculoTotalPorTipoDeIva = (
+  resultadoLineaTicket: ResultadoLineaTicket[]
+): TotalPorTipoIva[] => {
+  const resultado = resultadoLineaTicket.reduce(
+    (acumulador: TotalPorTipoIva[], resultado) => {
+      const iva = calcularImporteDeIva(
+        resultado.precioConIva,
+        resultado.tipoIva
+      );
+      const cuantia = Number((iva * resultado.cantidad).toFixed(2));
+
+      const tipoDeIvaEncontrado = acumulador.find(
+        (item) => item.tipoIva === resultado.tipoIva
+      );
+
+      if (tipoDeIvaEncontrado) {
+        tipoDeIvaEncontrado.cuantia += cuantia;
+      } else {
+        acumulador.push({
+          tipoIva: resultado.tipoIva,
+          cuantia: cuantia,
+        });
+      }
+
+      return acumulador;
+    },
+    []
+  );
+  return resultado;
+};
+
+console.log(calculoTotalPorTipoDeIva(resultadoLineaTicket));
