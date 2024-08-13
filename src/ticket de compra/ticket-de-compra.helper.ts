@@ -5,7 +5,10 @@ import {
   TotalPorTipoIva,
 } from "./model";
 
-const calcularImporteDeIva = (precio: number, tipoIva: string): number => {
+export const calcularImporteDeIva = (
+  precio: number,
+  tipoIva: string
+): number => {
   let iva: number;
   switch (tipoIva) {
     case "general":
@@ -27,10 +30,10 @@ const calcularImporteDeIva = (precio: number, tipoIva: string): number => {
       throw new Error("Tipo de IVA no válido");
   }
 
-  return iva;
+  return Number(iva.toFixed(2));
 };
 
-const calculaPrecioUnitarioSinIva = (
+export const calculaPrecioUnitarioSinIva = (
   precio: number,
   tipoIva: string
 ): number => {
@@ -69,7 +72,7 @@ export const calcularResultadoLineaTicket = (
 
 // Cálculo de totales
 
-const calculoTotalSinIva = (
+export const calculoTotalSinIva = (
   resultadoLineaTicket: ResultadoLineaTicket[]
 ): number => {
   const totalSinIva = resultadoLineaTicket.reduce(
@@ -80,7 +83,7 @@ const calculoTotalSinIva = (
   return totalSinIvaRedondeado;
 };
 
-const calculoTotalConIva = (
+export const calculoTotalConIva = (
   resultadoLineaTicket: ResultadoLineaTicket[]
 ): number => {
   const totalConIva = resultadoLineaTicket.reduce(
@@ -91,7 +94,7 @@ const calculoTotalConIva = (
   return totalConIvaRedondeado;
 };
 
-const calculoTotalIva = (
+export const calculoTotalIva = (
   resultadoLineaTicket: ResultadoLineaTicket[]
 ): number => {
   const totalConIva = calculoTotalConIva(resultadoLineaTicket);
@@ -121,7 +124,7 @@ export const calculoTotalPorTipoDeIva = (
         resultado.precioConIva,
         resultado.tipoIva
       );
-      const cuantia = Number((iva * resultado.cantidad).toFixed(2));
+      const cuantia = iva * resultado.cantidad;
 
       const tipoDeIvaEncontrado = acumulador.find(
         (item) => item.tipoIva === resultado.tipoIva
@@ -140,5 +143,9 @@ export const calculoTotalPorTipoDeIva = (
     },
     []
   );
+
+  resultado.forEach((item) => {
+    item.cuantia = Number(item.cuantia.toFixed(2));
+  });
   return resultado;
 };
