@@ -1,4 +1,9 @@
-import { LineaTicket, productos, ResultadoLineaTicket } from "./model";
+import {
+  LineaTicket,
+  productos,
+  ResultadoLineaTicket,
+  ResultadoTotalTicket,
+} from "./model";
 
 export const calculaPrecioUnitarioSinIva = (
   precio: number,
@@ -93,3 +98,16 @@ export const calculoTotalIva = (): number => {
 };
 
 console.log(calculoTotalIva());
+
+export const crearResultadoTotalTicket = (
+  resultadoLineaTicket: ResultadoLineaTicket[]
+): ResultadoTotalTicket => {
+  const resultadoTotalTicket: ResultadoTotalTicket = {
+    totalSinIva: calculoTotalSinIva(resultadoLineaTicket),
+    totalConIva: calculoTotalConIva(resultadoLineaTicket),
+    totalIva: calculoTotalIva(),
+  };
+  return resultadoTotalTicket;
+};
+
+console.log(crearResultadoTotalTicket(resultadoLineaTicket));
