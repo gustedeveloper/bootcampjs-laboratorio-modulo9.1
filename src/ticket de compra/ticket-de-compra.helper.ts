@@ -83,3 +83,13 @@ export const calculoTotalConIva = (
 };
 
 console.log(calculoTotalConIva(resultadoLineaTicket));
+
+export const calculoTotalIva = (): number => {
+  const totalConIva = calculoTotalConIva(resultadoLineaTicket);
+  const totalSinIva = calculoTotalSinIva(resultadoLineaTicket);
+  const totalIva = totalConIva - totalSinIva;
+  const totalIvaRedondeado = Number(totalIva.toFixed(2));
+  return totalIvaRedondeado;
+};
+
+console.log(calculoTotalIva());
