@@ -52,4 +52,19 @@ export const calcularResultadoLineaTicket = (
   return resultado;
 };
 
-console.log(calcularResultadoLineaTicket(productos));
+const resultadoLineaTicket = calcularResultadoLineaTicket(productos);
+
+// Cálculo de totales
+
+export const calculoTotalSinIva = (
+  resultadoLineaTicket: ResultadoLineaTicket[]
+): number => {
+  const totalSinIva = resultadoLineaTicket.reduce(
+    (total, resultado) => total + resultado.precioSinIva,
+    0
+  );
+  const totalSinIvaRedondeado = Number(totalSinIva.toFixed(2));
+  return totalSinIvaRedondeado;
+};
+
+console.log(calculoTotalSinIva(resultadoLineaTicket));
