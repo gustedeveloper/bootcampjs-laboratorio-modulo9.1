@@ -1,8 +1,8 @@
 # Bootcamp JavaScript 2 - Lemoncode
 
-## Laboratorio Módulo 8.2 - Array methods
+## Módulo 9 Algoritmos - Laboratorio 9.1 Ticket de Compra
 
-Este ejercicio es parte del Bootcamp de JavaScript de Lemoncode y representa la novena entrega correspondiente al Módulo 8.2 de Array Methods.
+Este ejercicio es parte del Bootcamp de JavaScript de Lemoncode y representa la duodécima entrega correspondiente a la primera parte del Módulo 9 de Algoritmos.
 
 ## Autor
 
