@@ -33,17 +33,17 @@ export const calcularImporteDeIva = (
   return Number(iva.toFixed(2));
 };
 
-export const calculaPrecioUnitarioSinIva = (
+export const calculaPrecioUnitarioConIva = (
   precio: number,
   tipoIva: string
 ): number => {
   const importeIva = calcularImporteDeIva(precio, tipoIva);
 
-  const precioSinIva = precio - importeIva;
+  const precioConIva = precio + importeIva;
 
-  const precioSinIvaRedondeado = Number(precioSinIva.toFixed(2));
+  const precioConIvaRedondeado = Number(precioConIva.toFixed(2));
 
-  return precioSinIvaRedondeado;
+  return precioConIvaRedondeado;
 };
 
 export const calcularResultadoLineaTicket = (
@@ -54,12 +54,12 @@ export const calcularResultadoLineaTicket = (
       const resultadoProducto: ResultadoLineaTicket = {
         nombre: producto.producto.nombre,
         cantidad: producto.cantidad,
-        precioSinIva: calculaPrecioUnitarioSinIva(
+        precioSinIva: producto.producto.precio,
+        tipoIva: producto.producto.tipoIva,
+        precioConIva: calculaPrecioUnitarioConIva(
           producto.producto.precio,
           producto.producto.tipoIva
         ),
-        tipoIva: producto.producto.tipoIva,
-        precioConIva: producto.producto.precio,
       };
       acumulador.push(resultadoProducto);
 
@@ -121,7 +121,7 @@ export const calculoTotalPorTipoDeIva = (
   const resultado = resultadoLineaTicket.reduce(
     (acumulador: TotalPorTipoIva[], resultado) => {
       const iva = calcularImporteDeIva(
-        resultado.precioConIva,
+        resultado.precioSinIva,
         resultado.tipoIva
       );
       const cuantia = iva * resultado.cantidad;
